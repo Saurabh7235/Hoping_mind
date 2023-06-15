@@ -1,0 +1,1437 @@
+Que.1- Mr. Kapil singh is a software eng. And he pays annual income tax as per the conditions.
+Income                             	tax
+4lc-7lc                               	no tax
+7lc – 10 lc                             5% on first exceeding 7 lcs
+10lc-14lc                           	10% on exceeding 10 lcs
+14lc – 18lc                         	15% on exceeding 14 lcs
+>18lcs                               	25% on exceeding 18 lcs
+
+Solution-income = float(input("Enter the annual income in lakhs: "))
+if income < 4:
+    tax = 0
+elif 4 <= income <= 7:
+    tax = 0
+elif 7 < income <= 10:
+    tax = 0.05 * (income - 7)
+elif 10 < income <= 14:
+    tax = 0.05 * (7 - 4) + 0.1 * (income - 10)
+elif 14 < income <= 18:
+    tax = 0.05 * (7 - 4) + 0.1 * (14 - 10) + 0.15 * (income - 14)
+else:
+    tax = 0.05 * (7 - 4) + 0.1 * (14 - 10) + 0.15 * (18 - 14) + 0.25 * (income - 18)
+print("Income Tax: ", tax, " lakhs")
+
+Que.2- A school library charges a fine for books returned after the due date acc. To the following condition : -
+Days                        	Fine
+1-5 days .40 p
+6-10 days                   .65p exceeding 6 days
+10-15days                  .80p exceeding 10days
+15-25days                   1.20p exceeding 15 days
+# if the book gets misplaced fine of Rs. 500 on each book, with the due date fine on the day of reporting
+# If the book has been hampered Rs.200 on each book, with the due date fine on the day of reporting
+# Calculate total fine acc. To the books lend to the student
+#Due date to return the book is 25days after the issue date
+
+Solution-def calculate_fine(days_late):
+    if days_late <= 5:
+        fine = 0.40 * days_late
+    elif 6 <= days_late <= 10:
+        fine = 0.40 * 5 + 0.65 * (days_late - 5)
+    elif 11 <= days_late <= 15:
+        fine = 0.40 * 5 + 0.65 * 5 + 0.80 * (days_late - 10)
+    elif 16 <= days_late <= 25:
+        fine = 0.40 * 5 + 0.65 * 5 + 0.80 * 5 + 1.20 * (days_late - 15)
+    else:
+        fine = 0
+    return fine
+num_books = int(input("Enter the number of books issued: "))
+total_fine = 0
+for book in range(num_books):
+    days_late = int(input("Enter the number of days late for book {}: ".format(book + 1)))
+    is_misplaced = input("Has the book been misplaced? (Y/N): ")
+    if is_misplaced.lower() == 'y':
+        total_fine += 500  # Fine for misplaced book only
+    elif days_late > 0:
+        total_fine += calculate_fine(days_late)
+        is_hampered = input("Has the book been hampered? (Y/N): ")
+        if is_hampered.lower() == 'y':
+            total_fine += calculate_fine(1)  
+print("Total Fine: Rs.", total_fine)
+
+
+Que.3- Special no.
+59
+5 9
+5+9= 14
+5*9=45
+14+45=59
+
+Solution-def is_special_number(number):
+    digits = [int(digit) for digit in str(number)]
+    sum_of_digits = sum(digits)
+    product_of_digits = 1
+    for digit in digits:
+        product_of_digits *= digit
+    if sum_of_digits + product_of_digits == number:
+        return True
+    else:
+        return False
+number = int(input("Enter a number: "))
+
+if is_special_number(number):
+    print(number, "is a Special Number.")
+else:
+    print(number, "is not a Special Number.")
+
+Que.4- Spy no. 
+123
+1  2   3 
+1+2+3 = 6
+1*2*3 = 6
+
+Solutiion-def is_spy_number(number):
+    digits = [int(digit) for digit in str(number)]
+    sum_of_digits = sum(digits)
+    product_of_digits = 1
+    for digit in digits:
+        product_of_digits *= digit
+    if sum_of_digits == product_of_digits:
+        return True
+    else:
+        return False
+number = int(input("Enter a number: "))
+
+if is_spy_number(number):
+    print(number, "is a Spy Number.")
+else:
+    print(number, "is not a Spy Number.")
+
+Que.5-sample input - 8     3    5      2     4     7     9     1 
+Sample output- 198   75   112    20    16    9     0     0
+
+
+Solution-def calculate_output(numbers):
+    output = []
+    for number in numbers:
+        result = number * (number + 1)
+        if result >= 100:
+            output.append(result % 100)
+        else:
+            output.append(result)
+    return output
+input_numbers = input("Enter a sequence of numbers separated by spaces: ")
+numbers_list = list(map(int, input_numbers.split()))
+output_list = calculate_output(numbers_list)
+print("Output:", " ".join(str(output) for output in output_list))
+
+Que.6-Harshad / Niven No.
+Eg. 156=
+1+5+6 = 12
+156/12==0
+
+
+Solutiion-def is_harshad_number(number):
+    digits = [int(digit) for digit in str(number)]
+    sum_of_digits = sum(digits)
+    if number % sum_of_digits == 0:
+        return True
+    else:
+        return False
+number = int(input("Enter a number: "))
+if is_harshad_number(number):
+    print(number, "is a Harshad Number (or Niven Number).")
+else:
+    print(number, "is not a Harshad Number (or Niven Number).")
+
+Que.7- Duck no. = containing 0
+Eg. 2008,7088,010….
+
+Solution-def is_duck_number(number):
+    number_str = str(number)
+    if '0' in number_str and number_str[0] != '0':
+        return True
+    else:
+        return False
+number = input("Enter a number: ")
+if is_duck_number(number):
+    print(number, "is a Duck Number.")
+else:
+    print(number, "is not a Duck Number.")
+
+Que.8- Neon no.
+9= 9*9 = 81
+8+1=9
+
+Solution-def is_neon_number(number):
+    square = number ** 2
+    digit_sum = sum(int(digit) for digit in str(square))
+    if digit_sum == number:
+        return True
+    else:
+        return False
+number = int(input("Enter a number: "))
+if is_neon_number(number):
+    print(number, "is a Neon Number.")
+else:
+    print(number, "is not a Neon Number.")
+
+Que.9- Automorphic no. 
+25 = 25*25 = 625
+
+Solution-def is_automorphic_number(number):
+    square = number ** 2
+    number_str = str(number)
+    square_str = str(square)
+    if square_str.endswith(number_str):
+        return True
+    else:
+        return False
+number = int(input("Enter a number: "))
+if is_automorphic_number(number):
+    print(number, "is an Automorphic Number.")
+else:
+    print(number, "is not an Automorphic Number.")
+
+
+Que.10-Implement the following function:
+int BalanceFruits(int a, int m, int rs);
+You have a basket full of apples and mangoes, your job is to make the numer of apples and given a function that accepts three integers 'a''mand 'rs' as its argument where aand a basket respectively and rs' is the rupees that you have. Implement the function to balance the basket.
+If i * a ^ 2 >^ 2 m^ 2 then buy (a - m) mangoes at the rate of R S overline 1 per mango. f^ prime prime a' <^ prime m^ prime . then sell (m - a) mangoes at the rate of Rs I per mango. Return the total rupees left with you after balancing the fruits.
+Assumption:
+a >= 0 , m >= 0 and rs >= 0rs >= (a - m) Note: If n = m return rs unchanged
+Sample Input:
+Explanation: Since a > m (a - m) mangoes are bought at Rs 1per mango, so rs = 6 - 4 = 2 Thus, output is 2.
+a:8
+m:4
+rs:6
+Sample Output
+
+Solution-def BalanceFruits(a, m, rs):
+    if a <= m:
+        return rs
+    num_mangoes_to_buy = a - m
+    cost_per_mango = 1
+    total_cost = num_mangoes_to_buy * cost_per_mango
+    remaining_rs = rs - total_cost
+    return remaining_rs
+a = int(input("Enter the number of apples: "))
+m = int(input("Enter the number of mangoes: "))
+rs = int(input("Enter the amount of rupees: "))
+result = BalanceFruits(a, m, rs)
+print("Total rupees left after balancing the fruits:", result)
+
+
+Que.11-You are required to implement the following function: int CountSpecificNumbers(int m, int n);
+
+The function accepts two arguments m and n which are integers. You are required to calculate the count of numbers having only 1, 4 and 9 as their digits between the numbers Ivine in the range m and n both inclusive, and return the same. Return -1 if m>n.
+I
+Sample Input:
+100
+200
+Sample Output:
+9
+Explanation:
+The numbers between 100 and 200, both inclusive having only 1,4 and 9 as their digits are 111, 114. 119, 141, 144, 149, 191, 194, 199. The count is 9 hence 9 is returned.
+
+Solution-def CountSpecificNumbers(m, n):
+    if m > n:
+        return -1
+    count = 0
+    for number in range(m, n+1):
+        digits = set(str(number))
+        if digits.issubset({'1', '4', '9'}):
+            count += 1
+    return count
+m = int(input("Enter the value of m: "))
+n = int(input("Enter the value of n: "))
+result = CountSpecificNumbers(m, n)
+print("Count of numbers with only 1, 4, and 9 as digits:", result)
+
+
+Que.12-Input1:3
+Input2: {1,2,3}
+Output: 2
+Explanation:
+The order that incurs the minimum penalty is 1,2,3. The penalty is abs(2-1) +abs(3-2)=2
+Input1:4
+Input2: (-2,1,4,6}
+Output: 8 D
+
+Solution-def calculate_penalty(order):
+    penalty = 0
+    for i in range(1, len(order)):
+        penalty += abs(order[i] - order[i-1])
+    return penalty
+n = int(input("Enter the number of elements in the order: "))
+order = []
+for i in range(n):
+    element = int(input("Enter element {}: ".format(i+1)))
+    order.append(element)
+minimum_penalty = calculate_penalty(order)
+print("Minimum penalty:", minimum_penalty)
+
+
+Que.13-Trailing Zeroes
+5! = 120
+10! = 3628800
+100! = 24
+5/5 =1 T ->T.Z.1
+10/5 = 2 ->T.Z.2
+100/5 = 20
+20/5 = 4
+20+ 4 = 24
+
+Solution-def calculate_trailing_zeroes(n):
+    count = 0
+    while n >= 5:
+        n //= 5
+        count += n
+    return count
+n = int(input("Enter a number: "))
+trailing_zeroes = calculate_trailing_zeroes(n)
+print("Number of trailing zeroes in {}! = {}".format(n, trailing_zeroes))
+
+
+Que.14- Given an array of integers, find the maximum sum of a contiguous subarray (a subarray with consecutive elements) within the array. Write a function maxSubarraySum that takes an array of integers as input and returns the maximum sum of a contiguous 
+
+Solution-def maxSubarraySum(arr):
+    if not arr:
+        return 0
+    max_sum = current_sum = arr[0]
+    for num in arr[1:]:
+        current_sum = max(num, current_sum + num)
+        max_sum = max(max_sum, current_sum)
+    return max_sum
+arr = list(map(int, input("Enter the array of integers (space-separated): ").split()))
+maximum_sum = maxSubarraySum(arr)
+print("Maximum sum of a contiguous subarray:", maximum_sum)
+
+
+Que.15-You are given a number N, you need to find the N-th number whose prime factors include 1,2,3,5 in range 1 to 10^3 inclusive
+ if you are given a number 7, then output will be 8.
+1 : 1
+2 : 1,2
+3 : 3
+4 : 1,2
+5 : 1,5
+6 : 1,2,3
+8 : 1,2
+9 : 1,3
+
+Solution-def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+def find_nth_number(n):
+    count = 0
+    number = 1
+    while count < n:
+        prime_factors = set()
+        for prime in [2, 3, 5]:
+            while number % prime == 0:
+                prime_factors.add(prime)
+                number //= prime
+        if prime_factors == {2, 3, 5}:
+            count += 1
+        number += 1
+    return number - 1
+n = int(input("Enter the value of N: "))
+nth_number = find_nth_number(n)
+print("N-th number whose prime factors include 1, 2, 3, and 5:", nth_number)
+
+
+Que.16- Write a program to find the difference between smallest and largest numbers in an array of positive integers.
+Eg : - 2,4,7,9,11,12,30,15
+Ans:  - 28
+
+Solution-def find_difference(arr):
+    if not arr:
+        return None
+    smallest = largest = arr[0]
+    for num in arr[1:]:
+        if num < smallest:
+            smallest = num
+        if num > largest:
+            largest = num
+    return largest - smallest
+arr = list(map(int, input("Enter the array of positive integers (comma-separated): ").split(",")))
+difference = find_difference(arr)
+print("Difference between smallest and largest numbers:", difference)
+
+
+Que.17- Write a program to find the  maximum difference between two adjacent numbers in an array of positive integers.
+Input 1: 5
+Input 2: 10,11,7,12,14
+Output: 4
+ 10 - 11 = -1
+11-7 = 4
+7-12= -5
+12-14= -2
+
+Solution-def max_adjacent_difference(arr):
+    if len(arr) < 2:
+        return None
+    max_diff = float('-inf')
+    for i in range(1, len(arr)):
+        diff = arr[i - 1] - arr[i]
+        max_diff = max(max_diff, diff)
+    return max_diff
+n = int(input("Enter the number of elements in the array: "))
+arr = list(map(int, input("Enter the array of positive integers (comma-separated): ").split(",")))
+max_difference = max_adjacent_difference(arr)
+print("Maximum difference between adjacent numbers:", max_difference)
+
+
+Que18-Write a program to return the difference between the sum of odd and even numbers from an array of positive integers.
+eg. : - 
+input 1: - 5
+input 2: - 10,11,7,12,14
+output : - -18
+
+Solution-def difference_odd_even_sum(arr):
+    odd_sum = even_sum = 0
+    for num in arr:
+        if num % 2 == 0:
+            even_sum += num
+        else:
+            odd_sum += num
+    return odd_sum - even_sum
+n = int(input("Enter the number of elements in the array: "))
+arr = list(map(int, input("Enter the array of positive integers (comma-separated): ").split(",")))
+difference = difference_odd_even_sum(arr)
+print("Difference between the sum of odd and even numbers:", difference)
+
+
+Que.19-Given an array of integers representing measurements in inches. Write a program to calculate the total measurements in feet. Ignore the measurements that are less than a feet.
+eg. - 
+input 1: - 5
+Input 2: - 18,11,27,12,14
+Output: - 5
+
+Solution-def calculate_total_feet(arr):
+    total_feet = 0
+    for measurement in arr:
+        if measurement >= 12:
+            total_feet += measurement // 12
+    return total_feet
+n = int(input("Enter the number of measurements: "))
+arr = list(map(int, input("Enter the measurements in inches (comma-separated): ").split(",")))
+total_feet = calculate_total_feet(arr)
+print("Total measurements in feet:", total_feet)
+
+
+Que.20-Write a program to calculate the electricity bill of a customer while taking input from the user and print name of the customer, contact no., address, meter no.,new reading,current reading , old reading, meter rent,meter no.,  calculate bill depending upon the following conditions :  - 
+
+Current reading(units)                           Charges(Rs.)                          Tax 
+>1 & <100                                             .80 paise per unit                     2%
+>100 & <300                                         Rs. 1 per unit                           5%
+>300 & < 500                                        Rs. 1.20 per unit                      7%
+>500 & <800                                         Rs. 2 per unit                           11%
+>800 & <1200                                       Rs. 2.50 per unit                      15%
+>1200                                                    Rs. 3.40 per unit                      18%
+
+Meter rent is fixed at rs. 50
+
+Solution-def calculate_electricity_bill(name, contact_no, address, meter_no, new_reading, current_reading, old_reading):
+    units_consumed = current_reading - old_reading
+    meter_rent = 50
+    charges = 0
+    tax_percentage = 0
+    if units_consumed > 1 and units_consumed < 100:
+        charges = units_consumed * 0.80
+        tax_percentage = 2
+    elif units_consumed >= 100 and units_consumed < 300:
+        charges = units_consumed * 1
+        tax_percentage = 5
+    elif units_consumed >= 300 and units_consumed < 500:
+        charges = units_consumed * 1.20
+        tax_percentage = 7
+    elif units_consumed >= 500 and units_consumed < 800:
+        charges = units_consumed * 2
+        tax_percentage = 11
+    elif units_consumed >= 800 and units_consumed < 1200:
+        charges = units_consumed * 2.50
+        tax_percentage = 15
+    elif units_consumed >= 1200:
+        charges = units_consumed * 3.40
+        tax_percentage = 18
+    total_tax = charges * (tax_percentage / 100)
+    total_bill = charges + total_tax + meter_rent
+    print("Electricity Bill")
+    print("Customer Name:", name)
+    print("Contact No.:", contact_no)
+    print("Address:", address)
+    print("Meter No.:", meter_no)
+    print("New Reading:", new_reading)
+    print("Current Reading:", current_reading)
+    print("Old Reading:", old_reading)
+    print("Meter Rent:", meter_rent)
+    print("Units Consumed:", units_consumed)
+    print("Charges (Rs.):", charges)
+    print("Tax (%):", tax_percentage)
+    print("Total Tax (Rs.):", total_tax)
+    print("Total Bill (Rs.):", total_bill)
+name = input("Enter Customer Name: ")
+contact_no = input("Enter Contact No.: ")
+address = input("Enter Address: ")
+meter_no = input("Enter Meter No.: ")
+new_reading = int(input("Enter New Reading: "))
+current_reading = int(input("Enter Current Reading: "))
+old_reading = int(input("Enter Old Reading: "))
+calculate_electricity_bill(name, contact_no, address, meter_no, new_reading, current_reading, old_reading)
+
+
+Que.21- Write a program to calculate the total bill tax amount for a list of billing amounts passed as an array of long integers.
+upto the amount of 1000, there is no tax applicable, subsequently, a flat tax of 10% is applicable for the remaining amount as per the tax rate.
+Note:- All calculations and results should be integer based ignoring fractions.
+
+Eg: -
+Input 1: 5
+Input 2: 1000,2000,3000,4000,5000
+Output: 1000
+
+Solution-def calculate_total_tax(billing_amounts):
+    total_tax = 0
+    tax_rate = 10
+    for amount in billing_amounts:
+        if amount > 1000:
+            taxable_amount = amount - 1000
+            tax_amount = (taxable_amount * tax_rate) // 100
+            total_tax += tax_amount
+    return total_tax
+n = int(input("Enter the number of billing amounts: "))
+billing_amounts = list(map(int, input("Enter the billing amounts (comma-separated): ").split(",")))
+total_tax = calculate_total_tax(billing_amounts)
+print("Total Bill Tax Amount:", total_tax)
+
+
+Que.22- remove Outermost parentheses
+Input : (()())(())
+Output: ()()()
+
+Solution-def remove_outer_parentheses(s):
+    stack = []
+    result = []
+    for char in s:
+        if char == '(':
+            if stack:
+                result.append(char)
+            stack.append(char)
+        elif char == ')':
+            stack.pop()
+            if stack:
+                result.append(char)
+    return ''.join(result)
+parentheses = input("Enter the parentheses string: ")
+output = remove_outer_parentheses(parentheses)
+print("Output:", output)
+
+
+Que.23-Write a program to count the occurrence of digits in a range.
+Input 1: starting point - 1
+         Ending point - 20
+Input 2: Digit: - 1
+Output : 12
+
+Solution-def count_digit_occurrence(start, end, digit):
+    count = 0
+    for num in range(start, end + 1):
+        count += str(num).count(str(digit))
+    return count
+start = int(input("Enter the starting point: "))
+end = int(input("Enter the ending point: "))
+digit = int(input("Enter the digit: "))
+occurrence = count_digit_occurrence(start, end, digit)
+print("Occurrence of digit", digit, "in the range", start, "to", end, "is:", occurrence)
+
+
+Que.24-Possible Number of decodings
+Let 'A' represents 1, 'B' represents 2, and so on.
+Input : 321
+Output : 2
+3   21  = c u
+3   2   1  = c b  a
+
+Input : 123
+Output : 3
+1  2  3   =  a  b  c
+12  3 = L c
+1 23=  a  w
+
+Solution-def count_decodings(s):
+    n = len(s)
+    dp = [0] * (n + 1)
+    dp[0] = 1
+    dp[1] = 1 if s[0] != '0' else 0
+    for i in range(2, n + 1):
+        one_digit = int(s[i - 1])
+        two_digits = int(s[i - 2:i])
+        if one_digit >= 1:
+            dp[i] += dp[i - 1]
+        if two_digits >= 10 and two_digits <= 26:
+            dp[i] += dp[i - 2]
+    return dp[n]
+sequence = input("Enter the sequence of numbers: ")
+decodings = count_decodings(sequence)
+print("Possible number of decodings:", decodings)
+
+
+Que.25- Given an integer K and an array[] of N integers which contains the ids of the opened apps in a system where 
+1. arr[0] is the app currently in use
+2. arr[1] is the app that was most recently used
+3. arr[N-1] is the app that was least recently used
+The task is to print the contents of the array when the user using the system presses Alt+Tab exactly K number of times. Note that after pressing the Alt+Tab key, the app opening pointer will move through apps from the 0th index towards the right, depending upon the number of presses, so the app on which the press ends will shift to the 0th index because that will become the most recently opened app.
+Input: arr[] ={3,5,2,4,1}
+K=3
+output: 4 3 5 2 1 
+3   5  2  4  1
+k= 2
+
+Output - 2  3  5  4 1 
+K =4
+ 1  2  3  5  4 
+
+K =1 
+2  1  3  5  4
+
+Solution-def alt_tab(arr, k):
+    n = len(arr)
+    curr_index = arr.index(arr[0])
+    curr_index = (curr_index + k) % n
+    rearranged_arr = arr[curr_index:] + arr[:curr_index]
+    return rearranged_arr
+app_ids = input("Enter the array of app IDs: ").split()
+app_ids = [int(id) for id in app_ids]
+k = int(input("Enter the number of Alt+Tab key presses: "))
+result = alt_tab(app_ids, k)
+print("Contents of the array after Alt+Tab key presses:", " ".join(map(str, result)))
+
+
+Que.26-Kebi has to send a secret code S to his boss. He designs a method to encrypt the code using two key values N and M. The formula that he uses to develop the encrypted code is shown below:
+(((S^N%10)^M%1000000007)
+write an algorithm to help Kebi to encrypt the code
+N
+M
+S
+a=pow(s,n)
+b=a%10
+C
+
+Solution-
+N = int(input("Enter the value of N: "))
+M = int(input("Enter the value of M: "))
+S = int(input("Enter the secret code S: "))
+a = pow(S, N)
+b = a % 10
+c = pow(b, M)
+C = c % 1000000007
+print("The encrypted code is:", C)
+
+
+Que.27-Jewels and stones Problem
+You're given strings jewels representing the types of stones that are jewels, and stones representing the stones you have. You want to know how many of the stones you have are also jewels.
+Letters are case sensitive, so 'a' is considered a different type of stone from 'A'
+Input : 
+Jewels = 'aA'
+Stones = 'aAAbbbb'
+output : 3
+
+Solution-
+Jewels = input("Enter the types of jewels: ")
+Stones = input("Enter the stones you have: ")
+count = 0
+for stone in Stones:
+    # Check if the stone is a jewel
+    if stone in Jewels:
+        count += 1
+print("Number of stones that are also jewels:", count)
+
+
+Que.28-You are given a string allowed consisting of distinct characters and an array of string words. A string is consistent if all characters in the string appear in the string allowed
+Return the number of consistent strings in the array of words
+Input : allowed = 'ab', words = ['ad','bd','aaab','baa','badab']
+Output : 2
+
+Count 1
+Count 2
+
+Solution-
+allowed = input("Enter the allowed characters: ")
+words = input("Enter the array of words: ").split()
+count = 0
+for word in words:
+    # Flag to indicate if the word is consistent
+    is_consistent = True
+    for char in word:
+        # Check if the character is not in the allowed string
+        if char not in allowed:
+            is_consistent = False
+            break
+    if is_consistent:
+        count += 1
+print("Number of consistent strings:", count)
+
+
+Que.29-A valid parentheses sequence is a non empty string where each character is either '(' or  ')'  ,   which satisfies the following constraint :
+You can find a way to repeatedly erase adjacent pairs of parentheses '()' until it becomes empty.
+For example : - '(())'   and '()((()()))'  are valid parentheses sequences, but ')()('  and  '(()' are not .
+
+Input : ()((()()))
+Output : ((()))
+
+(())) - invalid 
+)(())( - invalid
+ ((()))
+
+Solution-
+parentheses_sequence = input("Enter the parentheses sequence: ")
+stack = []
+for char in parentheses_sequence:
+    if char == '(':
+        stack.append(char)
+    elif char == ')':
+        if not stack:
+            print("Invalid")
+            exit()
+        stack.pop()
+if not stack:
+    print("Valid: ", parentheses_sequence)
+else:
+    print("Invalid")
+
+
+Que.30-Quadratic Equation 
+ax^2 + bx + c = 0
+formula = 
+b^2 - 4ac > 0 , real roots
+b^2 - 4ac = 0, roots equal
+b^2 - 4ac < 0, complex roots 
+
+Solution-import math
+a = float(input("Enter the coefficient a: "))
+b = float(input("Enter the coefficient b: "))
+c = float(input("Enter the coefficient c: "))
+discriminant = b**2 - 4*a*c
+if discriminant > 0:
+    root1 = (-b + math.sqrt(discriminant)) / (2*a)
+    root2 = (-b - math.sqrt(discriminant)) / (2*a)
+    print("Roots: ", root1, root2)
+elif discriminant == 0:
+    root = -b / (2*a)
+    print("Root: ", root)
+else:
+    real_part = -b / (2*a)
+    imaginary_part = math.sqrt(abs(discriminant)) / (2*a)
+    print("Roots: ", real_part, "+", imaginary_part, "i and", real_part, "-", imaginary_part, "i")
+
+
+Que.31-
+Remove Duplicates from sorted array
+Input : 
+nums=[0,0,1,1,1,2,2,3,3,4]
+Output : 
+nums=[0,1,2,3,4]
+
+Given an integer array nums sorted array in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same.
+
+Solution-def removeDuplicates(nums):
+    if not nums:
+        return 0
+    i = 0
+    for j in range(1, len(nums)):
+        if nums[j] != nums[i]:
+            i += 1
+            nums[i] = nums[j]
+    return i + 1
+nums = list(map(int, input("Enter the array elements: ").split()))
+new_length = removeDuplicates(nums)
+print("nums =", nums[:new_length])
+
+
+Que.32-Remove duplicates from sorted array(duplicates appears atmost twice)
+input : 
+nums=[1,1,1,2,2,3]
+Output :
+5
+Given an integer array nums sorted in non-decreasing order, remove some duplicates in-place such that each unique element appears at most twice. the relative order of the elements should be kept the same
+
+Solution-def removeDuplicates(nums):
+    if not nums:
+        return 0
+    i = 0
+    count = 1
+    for j in range(1, len(nums)):
+        if nums[j] == nums[i]:
+            if count < 2:
+                i += 1
+                nums[i] = nums[j]
+                count += 1
+        else:
+            i += 1
+            nums[i] = nums[j]
+            count = 1
+    return i + 1
+nums = list(map(int, input("Enter the array elements: ").split()))
+new_length = removeDuplicates(nums)
+print("nums =", nums[:new_length])
+
+
+Que.33- Write a program to  print all Armstrong numbers between the intervals entered by the user.
+
+Solution-def isArmstrongNumber(num):
+    num_digits = len(str(num))
+    temp = num
+    sum_of_cubes = 0
+    while temp > 0:
+        digit = temp % 10
+        sum_of_cubes += digit ** num_digits
+        temp //= 10
+    if num == sum_of_cubes:
+        return True
+    else:
+        return False
+start = int(input("Enter the starting number: "))
+end = int(input("Enter the ending number: "))
+print("Armstrong numbers between", start, "and", end, "are:")
+for num in range(start, end + 1):
+    if isArmstrongNumber(num):
+        print(num)
+
+
+Que.34-Write a program to  print all Perfect numbers between the intervals entered by the user.
+
+For eg-
+Input = 
+5
+Output = invalid
+5 = 1, 5
+1+5 = 6
+5!=6
+
+Input = 6
+Output = perfect no.
+6 = 1,2,3
+1+2+3 = 6
+6==6
+
+Solution-def isPerfectNumber(num):
+    sum_of_divisors = 0
+    for i in range(1, num):
+        if num % i == 0:
+            sum_of_divisors += i
+    if num == sum_of_divisors:
+        return True
+    else:
+        return False
+start = int(input("Enter the starting number: "))
+end = int(input("Enter the ending number: "))
+print("Perfect numbers between", start, "and", end, "are:")
+perfect_numbers = []
+for num in range(start, end + 1):
+    if isPerfectNumber(num):
+        perfect_numbers.append(num)
+if len(perfect_numbers) == 0:
+    print("No perfect numbers found in the given range.")
+else:
+    for num in perfect_numbers:
+        print(num)
+
+
+Que.35- Write a program to  print all Strong numbers between the intervals entered by the user.
+
+123
+1! + 2! + 3! = 
+1 + 2 + 6 = 9
+123 == 9 NO
+
+2. 
+145
+1! +  4!  +  5!
+1  +  24  +  120 = 145
+
+Solution-def factorial(num):
+    # Calculate the factorial of a number
+    fact = 1
+    for i in range(1, num + 1):
+        fact *= i
+    return fact
+
+def isStrongNumber(num):
+    sum_of_factorials = 0
+    temp = num
+    while temp > 0:
+        digit = temp % 10
+        sum_of_factorials += factorial(digit)
+        temp //= 1
+    if num == sum_of_factorials:
+        return True
+    else:
+        return False
+start = int(input("Enter the starting number: "))
+end = int(input("Enter the ending number: "))
+print("Strong numbers between", start, "and", end, "are:")
+strong_numbers = []
+for num in range(start, end + 1):
+    if isStrongNumber(num):
+        strong_numbers.append(num)
+if len(strong_numbers) == 0:
+    print("No strong numbers found in the given range.")
+else:
+    for num in strong_numbers:
+        print(num)
+
+Que.36- Remove all adjacent duplicates in string
+Input : 
+s='abbaca'
+Output:
+'ca'
+
+You are given a string s consisting of lowercase English letters. A duplicate removal consists of choosing two adjacent and equal letters and removing them.
+We repeatedly make duplicate removals on s until we no longer can.
+Return the final string after all such duplicate removals have been made. It can be proven that the answer is unique.
+
+Solution-def removeDuplicates(s):
+    stack = []
+    for char in s:
+        if stack and stack[-1] == char:
+            stack.pop()
+        else:
+            stack.append(char)
+    return ''.join(stack)
+s = input("Enter a string: ")
+result = removeDuplicates(s)
+print("Output:", result)
+
+
+Que.37- Write a program to find Strong Prime number taking the interval from the user - 
+Pn>Pn+1 + Pn-12
+P = prime no.
+n= position of P
+
+2,3,5,7,11….
+3>5+2/2 X not a strong prime no.
+
+Solution-def isPrime(n):
+    if n <= 1:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+def isStrongPrime(n):
+    if not isPrime(n):
+        return False
+    prev_prime = n - 1
+    next_prime = n + 1
+    sum_primes = prev_prime + next_prime
+    return isPrime(sum_primes)
+start = int(input("Enter the starting number of the interval: "))
+end = int(input("Enter the ending number of the interval: "))
+strong_primes = []
+for num in range(start, end + 1):
+    if isStrongPrime(num):
+        strong_primes.append(num)
+print("Strong Prime Numbers in the interval:", strong_primes)
+
+
+Que.38- Haystack and needle problem
+Input :
+haystack='happy'
+needle='pp'
+output :
+2
+ haystack='happy'
+needle='ll'
+output :
+-1
+haystack='happy'
+needle=’ '
+output :
+0
+return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+haystack and needle consist of only lower case english characters
+
+Solution-def findNeedle(haystack, needle):
+    if needle == '':
+        return 0
+    if len(haystack) < len(needle):
+        return -1
+    for i in range(len(haystack) - len(needle) + 1):
+        if haystack[i:i+len(needle)] == needle:
+            return i
+    return -1
+haystack = input("Enter the haystack string: ")
+needle = input("Enter the needle string: ")
+index = findNeedle(haystack, needle)
+print("Output:", index)
+
+
+Que.39-Repeated Substring pattern
+Input :
+s='abab'
+Output:
+True
+
+Input :
+s='aba'
+Output:
+False
+
+Original string =
+abab
+Append it
+‘abababab’
+
+i=0
+I+1 till last index - 1
+‘ a  bababa   b’
+We are 
+Given a string s, check if it can be constructed by taking a substring of it and appending multiple copies of the substring together.
+Constraints:
+1<= s.length <=10^4
+s consists of lowercase English letters
+
+Solution-def repeatedSubstringPattern(s):
+    n = len(s)
+    for i in range(1, n // 2 + 1):
+        if n % i == 0:
+            if s[:i] * (n // i) == s:
+                return True
+    return False
+s = input("Enter the string: ")
+result = repeatedSubstringPattern(s)
+print("Output:", result)
+
+
+Que.40-Maximum repeating substring
+Input :
+sequence = 'ababc'
+word= 'ab'
+ Output :
+2
+For a string sequence, a string word is K-repeating if the word concatenated K times is a substring of sequence. The word's maximum k-repeating value is the highest value k where the word is k-repeating in sequence. if a word is not a substring of sequence, the word's maximum k-repeating value is 0.
+Given strings sequence and word, return the maximum k-repeating value of word in sequence.
+
+Solution-def maxRepeating(sequence, word):
+    max_repeating = 0
+    for k in range(1, len(sequence) // len(word) + 1):
+        if word * k in sequence:
+            max_repeating = k
+        else:
+            break
+    return max_repeating
+sequence = input("Enter the sequence: ")
+word = input("Enter the word: ")
+result = maxRepeating(sequence, word)
+print("Output:", result)
+
+
+Que.41-Reverse the sentence
+Input :
+s='i am hungry'
+Output:
+'hungry am i'
+
+given an input string s, reverse the order of the words.
+A word is defined as a sequence of non-space characters. The words in s will be separated by at least one psace.
+Return a string of the words in reverse order concatenated by a single space.
+
+Solution-def reverseWords(s):
+    words = s.split()
+    reversed_words = words[::-1]
+    reversed_sentence = ' '.join(reversed_words)
+    return reversed_sentence
+s = input("Enter the sentence: ")
+result = reverseWords(s)
+print("Output:", result)
+
+
+Que.42-Reverse word in a string
+Input :
+s='let's do it'
+Output:
+'s'tel od it'
+
+Solution-def reverseWords(s):
+    words = s.split()
+    reversed_words = [word[::-1] for word in words]
+    reversed_sentence = ' '.join(reversed_words)
+    return reversed_sentence
+s = input("Enter the sentence: ")
+result = reverseWords(s)
+print("Output:", result)
+
+
+Que.43- Input :
+n=5, k=2, a[]={5,3,2,1,4}
+Output :
+2
+
+A company decide to hire some candidates. They arrange a JOB INTERVIEW to hire them. If total N candidates apply for the JOB, you have to select K candidates for the INTERVIEW from the total number of candidates. You can select the K candidates for the interview according to their academic scores. If all the candidates have the same score then call all the candidates for an interview.
+
+Solution-def selectCandidates(n, k, scores):
+    distinct_scores = set(scores)
+    if len(distinct_scores) == 1:
+        return n
+    else:
+        sorted_scores = sorted(scores)
+        cutoff_score = sorted_scores[-k]
+        count = 0
+        for score in scores:
+            if score >= cutoff_score:
+                count += 1
+        return count
+n = int(input("Enter the total number of candidates: "))
+k = int(input("Enter the number of candidates to select for the interview: "))
+scores = []
+for i in range(n):
+    score = int(input(f"Enter the academic score of candidate {i+1}: "))
+    scores.append(score)
+result = selectCandidates(n, k, scores)
+print("Output:", result)
+
+
+Que.44-Total number of common factors between 2 numbers
+Input :
+a=12, b=24
+Output:
+6
+
+Solution-def findCommonFactors(a, b):
+    common_factors = []
+    for i in range(1, min(a, b) + 1):
+        if a % i == 0 and b % i == 0:
+            common_factors.append(i)
+    return len(common_factors)
+a = int(input("Enter the first number: "))
+b = int(input("Enter the second number: "))
+result = findCommonFactors(a, b)
+print("Output:", result)
+
+
+Que.45- How many times a substring contains in a string.
+Input:
+Text= abxabcabcaby
+Pattern= abcaby
+Output:
+1
+
+ Input : aaaa
+3 repetition of patterns
+Pattern = aa
+
+Solution-def countSubstringOccurrences(text, pattern):
+    count = 0
+    start = 0
+    while start < len(text):
+        index = text.find(pattern, start)
+        if index != -1:
+            count += 1
+            start = index + len(pattern)
+        else:
+            break
+    return count
+text = input("Enter the text: ")
+pattern = input("Enter the pattern: ")
+result = countSubstringOccurrences(text, pattern)
+print("Output:", result)
+
+
+Que.46-Kids with the greatest number of candies
+Input :
+candies= [2,3,5,1,3] , extraCandies =3
+Output :
+[true,true,true,false,true]
+Given the array of candies and the integer extraCandies, where candies[i] represents the number of candies that the i-th kid has.
+For each kid check if there is a way to distribute extraCandies among the kids so that he or she can 
+ have the greatest number of candies among them.
+Notice that multiple kids can have the greatest number of candies.
+
+Solution-def kidsWithCandies(candies, extraCandies):
+    max_candies = max(candies)
+    result = []
+    for candy in candies:
+        if candy + extraCandies >= max_candies:
+            result.append(True)
+        else:
+            result.append(False)
+    return result
+candies_input = input("Enter the number of candies (separated by commas): ")
+candies = list(map(int, candies_input.split(",")))
+extra_candies = int(input("Enter the number of extra candies: "))
+result = kidsWithCandies(candies, extra_candies)
+print("Output:", result)
+
+
+Que.47-String matching in an array
+Input :
+words=["mass", "as","hero","superhero"]
+output :
+["as", "hero"]
+
+Given an array of string words. return all strings in words which are a substring of another word in any order.
+String words[i] is a substring of words[j] that can be obtained by removing some characters to the left and/or right side of words[j].
+
+Solution-def substring_words(words):
+    result = []
+    for i in range(len(words)):
+        for j in range(len(words)):
+            if i != j and words[i] in words[j]:
+                result.append(words[i])
+                break
+    return result
+words = input("Enter the words (separated by space): ").split()
+output = substring_words(words)
+print(output)
+
+
+Que.48-
+Q 53. String halves are alike?
+Input :
+s="bo ok"  
+a=bo 
+b=ok
+
+Output :
+true
+
+You are given a string s of even length. split this string into two halves of equal lengths, and let a be the first half and b be the second half.
+Two strings are alike if they have the same number of vowels ('a','e','i','o','u','A','E','I','O','U')
+Return true if a and b are alike. Otherwise , return false
+
+Solution-def halves_are_alike(s):
+    vowels = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'}
+    mid = len(s) // 2
+    a = s[:mid]
+    b = s[mid:]
+    count_a = count_b = 0
+    for char in a:
+        if char in vowels:
+            count_a += 1
+    for char in b:
+        if char in vowels:
+            count_b += 1
+    return count_a == count_b
+s = input("Enter the string: ")
+result = halves_are_alike(s)
+print(result)
+
+Que.49- Increasing Decreasing String
+Input :
+s='aaaabbbbcccc'
+Output :
+'abccbaabccba'
+
+Given a string a. You should re-order the string using the following algorithm:
+1. Add the smallest character from s and append it to the result.
+2. Pick the smallest character from s which is greater than the last appended character to the result and append it.
+3. Repeat step 2 until you cannot pick more characters.
+4. Pick the largest character from s and append it to the result.
+5. Pick the largest character from s which is smaller than the last appended character to the result and append it.
+6. Repeat step 5 until you cannot pick more characters.
+7. Repeat the steps from 1 to 6 until you pick all characters from s.
+In each step, if the smallest or the largest character appears more than once you can choose any occurrence and append it to the result.
+Return the result string after sorting s with this algorithm.
+
+Solution-from collections import Counter
+
+def sortString(s):
+    result = []
+    counter = Counter(s)
+    chars = sorted(counter.keys())
+    n = len(chars)
+    while len(result) < len(s):
+        for i in range(n):
+            if counter[chars[i]] > 0:
+                result.append(chars[i])
+                counter[chars[i]] -= 1
+        for i in range(n - 1, -1, -1):
+            if counter[chars[i]] > 0:
+                result.append(chars[i])
+                counter[chars[i]] -= 1
+    return ''.join(result)
+s = input("Enter the string: ")
+result = sortString(s)
+print(result)
+
+
+Que.50- Generate a string with characters that have odd counts.
+Input :
+n=4
+Output:
+'pppz'
+
+given an integer n return a string with n characters such that each character in such string occurs an odd number of times.
+The returned string must contain only lowercase English letters. If there are multiple valid strings, return any of them.
+
+Solution-def generate_odd_string(n):
+    if n % 2 == 0:
+        return 'p' * (n - 1) + 'z'
+    else:
+        return 'p' * n
+n = int(input("Enter the number of characters: "))
+result = generate_odd_string(n)
+print(result)
+
+
+Que.51-The running sum of 1d Array
+Input : 
+nums=[3,1,2,10,1]
+Output : [3,4,6,16,17]
+
+Given an array nums. We define a running sum of an array as runningSum[i]=sum(nums[0].....nums[i])
+Return the running sum of nums.
+
+Solution-def runningSum(nums):
+    running_sum = []
+    current_sum = 0
+    for num in nums:
+        current_sum += num
+        running_sum.append(current_sum)
+    return running_sum
+nums = input("Enter the numbers (separated by space): ").split()
+nums = [int(num) for num in nums]
+result = runningSum(nums)
+print(result)
+
+
+Que.52-Richest Customer wealth
+Input : 
+accounts= [[1,5],[7,3],[3,5]]
+Output : 10
+
+You are given an m X n integer grid accounts where accounts[i][j] is the amount of money the ith customer has in the jth bank. Return the wealth that the richest customer has. A customer's wealth is the amount of money they have in all their bank accounts. The richest customer is the customer that has the maximum wealth.
+
+Solution-def maximumWealth(accounts):
+    max_wealth = 0
+    for customer in accounts:
+        wealth = sum(customer)
+        max_wealth = max(max_wealth, wealth)
+    return max_wealth
+accounts = []
+rows = int(input("Enter the number of rows: "))
+columns = int(input("Enter the number of columns: "))
+for i in range(rows):
+    row = input(f"Enter the space-separated values for row {i+1}: ").split()
+    row = [int(num) for num in row]
+    accounts.append(row)
+result = maximumWealth(accounts)
+print(result)
+
+
+Que.53- Shuffle the Array
+Input :
+nums = [2,5,1,3,4,7]
+n=3
+Output :
+[2,3,5,4,1,7]
+
+Given the array nums consisting of 2n elements in the form [x1,x2,......,xn,y1,y2,......,yn]
+Return the array in the form [x1,y1,x2,y2,......,xn,yn]
+
+Solution-def shuffleArray(nums, n):
+    shuffled = []
+    for i in range(n):
+        shuffled.append(nums[i])
+        shuffled.append(nums[i + n])
+    return shuffled
+nums = input("Enter the numbers (separated by space): ").split()
+nums = [int(num) for num in nums]
+n = int(input("Enter the value of n: "))
+result = shuffleArray(nums, n)
+print(result)
+
+
+Que.54-Number of Good pairs
+Input :
+nums =[1,2,3,1,1,3]
+Output: 4
+Given an array of integers nums.
+A pair (i,j) is called good if nums[i]==nums[j] and i < j
+Return the number of good pairs.
+
+Solution-def numIdenticalPairs(nums):
+    count = 0
+    for i in range(len(nums)):
+        for j in range(i+1, len(nums)):
+            if nums[i] == nums[j]:
+                count += 1
+    return count
+nums = input("Enter the numbers (separated by space): ").split()
+nums = [int(num) for num in nums]
+result = numIdenticalPairs(nums)
+print(result)
+
+
+Que.55- How many numbers are smaller than the current number
+Input :
+nums= [8,1,2,2,3]
+Output :
+[4,0,1,1,3]
+Given the array nums, for each nums[i]
+
+Solution-def smallerNumbersThanCurrent(nums):
+    counts = []
+    for i in range(len(nums)):
+        count = 0
+        for j in range(len(nums)):
+            if nums[j] < nums[i]:
+                count += 1
+        counts.append(count)
+    return counts
+nums = input("Enter the numbers (separated by space): ").split()
+nums = [int(num) for num in nums]
+result = smallerNumbersThanCurrent(nums)
+print(result)
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
